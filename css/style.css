@@ -1,0 +1,92 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar-light .navbar-brand {
+  color: #6a5acd;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: #6a5acd;
+}
+
+.carousel-inner img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.btn-primary {
+  background-color: #6a5acd;
+  border: none;
+}
+
+.new-arrivals {
+  text-align: center;
+  padding: 50px 0;
+}
+
+.new-arrivals img {
+  max-width: 100%;
+  height: auto;
+}
+
+.new-arrivals h2 {
+  margin-top: 20px;
+  font-size: 2rem;
+  color: #6a5acd;
+}
+
+.card-title {
+  color: #6a5acd;
+}
+
+.card-text {
+  color: #555;
+}
+
+.btn-primary {
+  background-color: #6a5acd;
+  border: none;
+}
+
+.footer {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.footer h5 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer ul li a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer .d-flex a img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease-in-out;
+}
+
+.footer .d-flex a img:hover {
+  filter: none;
+}
+
+.container .row .col-md-6 img {
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.container .row .col-md-6 img:hover {
+  transform: scale(1.05);
+}
