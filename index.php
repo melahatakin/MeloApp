@@ -1,5 +1,25 @@
 <?php include "views/_header.php"; ?>
 <?php include "includes/navbar.php"; ?>
+<?php include 'config.php'; ?>
+<?php include 'libs/function.php'; ?>
+<?php // Ürünleri rastgele seçmek için query'leri oluşturuyoruz
+$women_products_query = "SELECT * FROM women_products ORDER BY RAND() LIMIT 1";
+$men_products_query = "SELECT * FROM men_products ORDER BY RAND() LIMIT 1";
+$children_products_query = "SELECT * FROM children_products ORDER BY RAND() LIMIT 1";
+
+// Kadın ürünlerinden rastgele bir ürünü çekiyoruz
+$women_result = $conn->query($women_products_query);
+$women_product = $women_result->fetch_assoc();
+
+// Erkek ürünlerinden rastgele bir ürünü çekiyoruz
+$men_result = $conn->query($men_products_query);
+$men_product = $men_result->fetch_assoc();
+
+// Çocuk ürünlerinden rastgele bir ürünü çekiyoruz
+$children_result = $conn->query($children_products_query);
+$children_product = $children_result->fetch_assoc();
+?>
+
 
 <!-- Ana İçerik Başlangıç -->
 <div class="container mt-4">
@@ -43,7 +63,7 @@
                 <div class="col text-center">
                     <img src="image/yeni.png" class="img-fluid" alt="Yeni Gelenler">
                     <h2 class="my-4">Yeni Gelenler</h2>
-                    <a href="views/_yenigelen.php" class="btn btn-primary">Alışverişe Başla</a>
+                    <a href="products.php" class="btn btn-primary">Alışverişe Başla</a>
                 </div>
             </div>
         </div>
@@ -60,7 +80,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Ürün 1</h5>
                         <p class="card-text">Kısa açıklama</p>
-                        <a href="kadın/kadınustgiyim.php" class="btn btn-primary">Ürüne Git</a>
+                        <a href="urun_detay.php?kategori=kadin&urun_id=1" class="btn btn-primary">Ürüne Git</a>
                     </div>
                 </div>
             </div>
@@ -70,7 +90,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Ürün 2</h5>
                         <p class="card-text">Kısa açıklama</p>
-                        <a href="kadın/kadınaltgiyim.php" class="btn btn-primary">Ürüne Git</a>
+                        <a href="urun_detay.php?kategori=erkek&urun_id=1" class="btn btn-primary">Ürüne Git</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +100,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Ürün 3</h5>
                         <p class="card-text">Kısa açıklama</p>
-                        <a href="kadın/kadınaksesuar.php" class="btn btn-primary">Ürüne Git</a>
+                        <a href="urun_detay.php?kategori=kadin&urun_id=3" class="btn btn-primary">Ürüne Git</a>
                     </div>
                 </div>
             </div>
@@ -90,31 +110,30 @@
                     <div class="card-body">
                         <h5 class="card-title">Ürün 4</h5>
                         <p class="card-text">Kısa açıklama</p>
-                        <a href="kadın/kadınyenigelenler.php" class="btn btn-primary">Ürüne Git</a>
+                        <a href="urun_detay.php?kategori=kadin&urun_id=4" class="btn btn-primary">Ürüne Git</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Ürünler Kısmı Bitiş -->
+    <!-- Ürünler Kısmı Bitiş -->
 
-<!-- Multi Banner Başlangıç -->
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <a href="views/_coksatanlar.php">
-                <img src="image/coksat.png" class="img-fluid" alt="Banner 1">
-            </a>
-        </div>
-        <div class="col-md-6">
-            <a href="views/_enucuz.php">
-                <img src="image/ikiyuzelli.png" class="img-fluid" alt="Banner 2">
-            </a>
+    <!-- Multi Banner Başlangıç -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="views/_coksatanlar.php">
+                    <img src="image/coksat.png" class="img-fluid" alt="Banner 1">
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="views/_enucuz.php">
+                    <img src="image/ikiyuzelli.png" class="img-fluid" alt="Banner 2">
+                </a>
+            </div>
         </div>
     </div>
-</div>
-<!-- Ana İçerik Bitiş -->
+    <!-- Ana İçerik Bitiş -->
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

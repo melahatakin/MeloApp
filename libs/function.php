@@ -1,72 +1,59 @@
 <?php
-function getData()
+include 'config.php';
+function getUrunById($kategori, $urun_id)
 {
-    $myfile = fopen("db.json", "r");
-    $size = filesize("db.json");
+    global $servername, $username, $password, $dbname;
 
-    $result = json_decode(fread($myfile, $size), true);
-    fclose($myfile);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    return $result;
-}
-// gelen veri eşleşip eşleşmediğini kontrol ediyoruz.
-// function getUser(string $username)
-// {
-//     $users = getData()["users"];
-//     foreach ($users as $user) {
-//         if ($user["username"] == $username) {
-//             return $user;
-//         }
-//     }
-//     return null;
-// }
-
-require 'config.php';
-
-// Kullanıcıyı veritabanından alır
-function getUser($username)
-{
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
-}
-
-// Ürünleri kategorisine göre alır
-function getProductsByCategory($category)
-{
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM urunler WHERE kategori = ?");
-    $stmt->bind_param("s", $category);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-}
-
-// Sepetten ürün çıkarma
-function removeFromCart($id)
-{
-    if (($key = array_search($id, $_SESSION['sepet'])) !== false) {
-        unset($_SESSION['sepet'][$key]);
+    if ($conn->connect_error) {
+        die("Bağlantı hatası: " . $conn->connect_error);
     }
-}
 
-// Sepete ürün ekleme
-function addToCart($id)
-{
-    if (!isset($_SESSION['sepet'])) {
-        $_SESSION['sepet'] = array();
-    }
-    if (!in_array($id, $_SESSION['sepet'])) {
-        $_SESSION['sepet'][] = $id;
-    }
-}
-
-// İndirimdeki ürünleri alır
-function getDiscountedProducts()
-{
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM urunler WHERE indirim = 1");
+    $sql = "SELECT * FROM $kategori WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $urun_id);
     $stmt->execute();
-    return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $result = $stmt->get_result();
+    $urun = $result->fetch_assoc();
+
+    $conn->close();
+
+    return $urun;
+}
+
+function sepeteEkle($user_id, $urun_id, $kategori)
+{
+    global $servername, $username, $password, $dbname;
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Bağlantı hatası: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO cart (user_id, product_id, category, quantity) VALUES (?, ?, ?, 1) ON DUPLICATE KEY UPDATE quantity = quantity + 1";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iis", $user_id, $urun_id, $kategori);
+    $stmt->execute();
+
+    $conn->close();
+}
+
+function favorilereEkle($user_id, $urun_id, $kategori)
+{
+    global $servername, $username, $password, $dbname;
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Bağlantı hatası: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO favorites (user_id, product_id, category) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iis", $user_id, $urun_id, $kategori);
+    $stmt->execute();
+
+    $conn->close();
 }

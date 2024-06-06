@@ -1,8 +1,11 @@
 <?php
-// Veritabanı bağlantısı
-$conn = new mysqli('localhost', 'kullanici_adi', 'sifre', 'veritabani_adi');
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "melo_store";
 
-// Bağlantı kontrolü
+$conn = new mysqli($servername, $username, $password, $dbname);
+
 if ($conn->connect_error) {
-    die("Veritabanı bağlantısı başarısız: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }

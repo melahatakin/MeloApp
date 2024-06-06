@@ -46,7 +46,7 @@
             </form>
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="favorilerim.php">Favorilerim</a>
+                    <a class="nav-link" href="favorites.php">Favorilerim</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Giriş Yap</a>
@@ -55,13 +55,9 @@
                         <li><a class="dropdown-item" href="register.php">Kayıt Ol</a></li>
                     </ul>
                 </li>
-                <?php if (isset($_SESSION['auth'])) : ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Çıkış Yap</a>
-                    </li>
-                <?php endif; ?>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="sepet.php">
+                    <a class="nav-link" href="cart.php">
                         <img src="image/sepet.png" alt="Sepet" width="24">
                     </a>
                 </li>

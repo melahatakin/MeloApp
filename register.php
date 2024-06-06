@@ -1,56 +1,42 @@
 <?php
-require "libs/vars.php";
-require "libs/function.php";
+include 'config.php';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-if (isset($_POST["login"])) {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    $sql = "INSERT INTO kullanicilar (username, password) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $username, $hashed_password);
 
-    //burada getuser'dan gelen username bilgisini çekiyoruz.
-    //fonksiyona parametre gönderecek ve gelen parametreye gre doğru mu yanlış mı kontrol edecek.   
-    $user = getUser($username);
-
-    if (!is_null($user) and $username == $user["username"] and $password == $user["password"]) {
-
-        setcookie("auth[username]", $username, time() + (60 * 60));
-        setcookie("auth[name]", $username, time() + (60 * 60));
-
-        header('Location: index.php');
+    if ($stmt->execute()) {
+        echo "Kayıt başarılı. Giriş yapmak için <a href='login.php'>tıklayın</a>.";
     } else {
-        echo "<div class='alert alert-danger mb-0 text-center'>Yanlış Kullanıcı adı veya şifre</div>";
+        echo "Hata: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
-
-
 ?>
-<?php include "views/_header.php" ?>
-<?php include "includes/navbar.php" ?>
 
-<div class="container my-5">
+<!DOCTYPE html>
+<html lang="tr">
 
-    <div class="row">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+</head>
 
-        <div class="col-12">
+<body>
+    <h2>Kayıt Ol</h2>
+    <form method="post" action="">
+        Kullanıcı Adı: <input type="text" name="username" required><br>
+        Şifre: <input type="password" name="password" required><br>
+        <input type="submit" value="Kayıt Ol">
+    </form>
+</body>
 
-            <div class="card">
-                <div class="card-body">
-                    <form action="login.php" method="POST">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">username</label>
-                            <input type="text" class="form-control" name="username" id="username">
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">passsword</label>
-                            <input type="password" class="form-control" name="password" id="password">
-                        </div>
-                        <input type="submit" name="login" value="Submit" class="btn btn-success">
-                    </form>
-                </div>
-            </div>
-        </div>
-
-
-
-    </div>
-</div>
+</html>

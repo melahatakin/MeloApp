@@ -1,23 +1,19 @@
 <?php
-include "views/_header.php";
-include "includes/navbar.php";
-require "config.php"; // Veritabanı bağlantısı
+include 'config.php';
+include 'libs/function.php';
+include 'includes/navbar.php';
 
-$category_id = 1; // Kadın kategorisinin ID'si
+$sql = "SELECT urunler.*, kategoriler.isim AS kategori_isim FROM urunler JOIN kategoriler ON urunler.kategori_id = kategoriler.id WHERE kategoriler.isim LIKE 'Kadın%'";
+$result = $conn->query($sql);
 
-// Kadın kategorisindeki alt kategorileri çekme
-$query = "SELECT * FROM categories WHERE parent_id = $category_id";
-$result = mysqli_query($conn, $query);
-$subcategories = mysqli_fetch_all($result, MYSQLI_ASSOC);
-?>
+if ($result->num_rows > 0) {
+    echo "<h2>Kadın Kategorisi</h2><table><tr><th>Ürün İsmi</th><th>Fiyat</th><th>Kategori</th></tr>";
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr><td>" . $row["isim"] . "</td><td>" . $row["fiyat"] . "</td><td>" . $row["kategori_isim"] . "</td></tr>";
+    }
+    echo "</table>";
+} else {
+    echo "Bu kategoride ürün bulunmamaktadır.";
+}
 
-<div class="container mt-4">
-    <h2>Kadın Kategorisi</h2>
-    <div class="row">
-        <?php foreach ($subcategories as $subcategory) : ?>
-            <div class="col-md-3">
-                <a href="kadın_<?= strtolower($subcategory['name']) ?>.php" class="btn btn-primary"><?= $subcategory['name'] ?></a>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
+$conn->close();

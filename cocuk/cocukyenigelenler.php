@@ -3,7 +3,7 @@ include 'config.php';
 include 'libs/function.php';
 include 'includes/navbar.php';
 
-$kategori_ismi = 'Kadın Aksesuar';
+$kategori_ismi = 'Çocuk Yeni Gelenler';
 $sql = "SELECT urunler.* FROM urunler JOIN kategoriler ON urunler.kategori_id = kategoriler.id WHERE kategoriler.isim = '$kategori_ismi'";
 $result = $conn->query($sql);
 
