@@ -2,20 +2,20 @@
 <?php include "includes/navbar.php"; ?>
 <?php include 'config.php'; ?>
 <?php include 'libs/function.php'; ?>
-<?php // Ürünleri rastgele seçmek için query'leri oluşturuyoruz
+<?php // Ürünleri rastgele seçmek için query'leri oluşturma 
 $women_products_query = "SELECT * FROM women_products ORDER BY RAND() LIMIT 1";
 $men_products_query = "SELECT * FROM men_products ORDER BY RAND() LIMIT 1";
 $children_products_query = "SELECT * FROM children_products ORDER BY RAND() LIMIT 1";
 
-// Kadın ürünlerinden rastgele bir ürünü çekiyoruz
+// Kadın ürünlerinden rastgele bir ürünü çekme
 $women_result = $conn->query($women_products_query);
 $women_product = $women_result->fetch_assoc();
 
-// Erkek ürünlerinden rastgele bir ürünü çekiyoruz
+// Erkek ürünlerinden rastgele bir ürünü çekme
 $men_result = $conn->query($men_products_query);
 $men_product = $men_result->fetch_assoc();
 
-// Çocuk ürünlerinden rastgele bir ürünü çekiyoruz
+// Çocuk ürünlerinden rastgele bir ürünü çekme
 $children_result = $conn->query($children_products_query);
 $children_product = $children_result->fetch_assoc();
 ?>
@@ -31,17 +31,17 @@ $children_product = $children_result->fetch_assoc();
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <a href="banner/banner1.php">
+                <a href="kadın/kadınyenigelenler.php">
                     <img src="image/ban1.png" class="d-block w-100" alt="Banner 1">
                 </a>
             </div>
             <div class="carousel-item">
-                <a href="banner/banner2.php">
+                <a href="kadın/kadinustgiyim.php">
                     <img src="image/ban2.png" class="d-block w-100" alt="Banner 2">
                 </a>
             </div>
             <div class="carousel-item">
-                <a href="banner/banner3.php">
+                <a href="kadın/kadinaltgiyim.php">
                     <img src="image/ban3.png" class="d-block w-100" alt="Banner 3">
                 </a>
             </div>
@@ -63,7 +63,7 @@ $children_product = $children_result->fetch_assoc();
                 <div class="col text-center">
                     <img src="image/yeni.png" class="img-fluid" alt="Yeni Gelenler">
                     <h2 class="my-4">Yeni Gelenler</h2>
-                    <a href="products.php" class="btn btn-primary">Alışverişe Başla</a>
+                    <a href="kadın/kadınyenigelenler.php" class="btn btn-primary">Alışverişe Başla</a>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 include 'libs/function.php';
 include 'includes/navbar.php';
 
-$user_id = 1; // Örnek kullanıcı ID'si, oturum açma sistemi kullanıyorsanız bunu dinamik yapmalısınız.
+$user_id = 1;
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    // Kullanıcı adının kullanılıp kullanılmadığını kontrol et
+    // Kullanıcı adının kullanılıp kullanılmadığını kontrol etme işl.
     $check_username_sql = "SELECT id FROM kullanicilar WHERE username = ?";
     $check_stmt = $conn->prepare($check_username_sql);
     $check_stmt->bind_param("s", $username);
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($check_stmt->num_rows > 0) {
         $error_message = "Bu kullanıcı adı zaten kullanılıyor.";
     } else {
-        // Kullanıcı adı kullanılmıyorsa, kullanıcıyı kaydet
+        // Kullanıcı adı kullanılmıyorsa, kullanıcıyı kaydet diyoruz.
         $insert_sql = "INSERT INTO kullanicilar (username, password) VALUES (?, ?)";
         $insert_stmt = $conn->prepare($insert_sql);
         $insert_stmt->bind_param("ss", $username, $hashed_password);

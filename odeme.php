@@ -2,7 +2,7 @@
 include 'libs/function.php';
 include 'includes/navbar.php';
 
-$user_id = 1; // Örnek kullanıcı ID'si, oturum açma sistemi kullanıyorsanız bunu dinamik yapmalısınız.
+$user_id = 1;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $adres = $_POST['adres'];
@@ -10,8 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $kart_son_kullanma = $_POST['kart_son_kullanma'];
     $kart_cvv = $_POST['kart_cvv'];
 
-    // Sipariş özetini kaydet ve işlemi tamamla
-    // Bu adımda, siparişi veritabanına kaydedebilir ve stok güncellemesi yapabilirsiniz.
+    // Sipariş özetini kaydet ve işlemi tamamlama
+    //burada siparişi veritabanına kaydedebilir ve stok güncellemesi yapabilirim.UNUTMAAAA!!!!
 
     // Sepeti temizle
     satinAl($user_id);

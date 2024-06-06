@@ -2,7 +2,7 @@
 include 'config.php';
 
 
-// Veritabanı bağlantısı
+// Veritabanı bağlantısı yapılan kısım
 function dbConnect()
 {
     global $servername, $username, $password, $dbname;
@@ -13,7 +13,7 @@ function dbConnect()
     return $conn;
 }
 
-// Ürün bilgilerini getir
+// Ürün bilgilerini getirme işl.
 function getUrunById($kategori, $urun_id)
 {
     $conn = dbConnect();
@@ -28,7 +28,7 @@ function getUrunById($kategori, $urun_id)
     return $urun;
 }
 
-// Favorilere ekle
+// Favorilere ekleme işl.
 function favorilereEkle($user_id, $urun_id, $kategori)
 {
     $conn = dbConnect();
@@ -40,7 +40,7 @@ function favorilereEkle($user_id, $urun_id, $kategori)
     $conn->close();
 }
 
-// Favorilerden çıkar
+// Favorilerden çıkarma işl.
 function favorilerdenCikar($user_id, $urun_id, $kategori)
 {
     $conn = dbConnect();
@@ -52,7 +52,7 @@ function favorilerdenCikar($user_id, $urun_id, $kategori)
     $conn->close();
 }
 
-// Sepete ekle
+// Sepete ekleme işl.
 function sepeteEkle($user_id, $urun_id, $kategori)
 {
     $conn = dbConnect();
@@ -64,7 +64,7 @@ function sepeteEkle($user_id, $urun_id, $kategori)
     $conn->close();
 }
 
-// Sepetten çıkar
+// Sepetten çıkarma işl.
 function sepettenCikar($user_id, $urun_id, $kategori)
 {
     $conn = dbConnect();
@@ -76,11 +76,11 @@ function sepettenCikar($user_id, $urun_id, $kategori)
     $conn->close();
 }
 
-// Sepeti satın al
+// Sepeti satın alma işlemi
 function satinAl($user_id)
 {
     $conn = dbConnect();
-    // Sipariş özetini almak
+    // Sipariş özetini almak için kull fonk.
     $sql = "SELECT * FROM cart WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
@@ -91,7 +91,7 @@ function satinAl($user_id)
         $urun_id = $row['product_id'];
         $kategori = $row['category'];
 
-        // Siparişi siparişler tablosuna ekle
+        // Siparişi siparişler tablosuna ekleme işlmei
         $sqlInsert = "INSERT INTO orders (user_id, product_id, category) VALUES (?, ?, ?)";
         $stmtInsert = $conn->prepare($sqlInsert);
         $stmtInsert->bind_param("iis", $user_id, $urun_id, $kategori);
@@ -99,7 +99,7 @@ function satinAl($user_id)
         $stmtInsert->close();
     }
 
-    // Sepeti temizle
+    // Sepeti temizleme işlemi
     $sqlDelete = "DELETE FROM cart WHERE user_id = ?";
     $stmtDelete = $conn->prepare($sqlDelete);
     $stmtDelete->bind_param("i", $user_id);
@@ -110,7 +110,7 @@ function satinAl($user_id)
     $conn->close();
 }
 
-// Kullanıcı siparişini kaydet
+// Kullanıcı siparişini kaydetme işlemi
 function siparisiKaydet($user_id, $adres, $kart_numarasi, $kart_son_kullanma, $kart_cvv)
 {
     $conn = dbConnect();

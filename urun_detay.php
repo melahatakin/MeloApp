@@ -3,7 +3,7 @@ include 'libs/function.php';
 
 $kategori = $_GET['kategori'];
 $urun_id = $_GET['urun_id'];
-$user_id = 1; // Örnek kullanıcı ID'si, oturum açma sistemi kullanıyorsanız bunu dinamik yapmalısınız.
+$user_id = 1;
 
 $urun = getUrunById($kategori, $urun_id);
 

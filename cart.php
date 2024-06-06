@@ -1,10 +1,10 @@
 <?php
-ob_start(); // Çıktı tamponlamayı başlat
+ob_start(); // Çıktı tamponlamayı başlatma kısmı burada gerçekleşiyor.
 
 include 'libs/function.php';
 include 'includes/navbar.php';
 
-$user_id = 1; // Örnek kullanıcı ID'si, oturum açma sistemi kullanıyorsanız bunu dinamik yapmalısınız.
+$user_id = 1;
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
     if (isset($_POST['sepeti_onayla'])) {
-        satinAl($user_id); // Sepeti satın al
+        satinAl($user_id); // Sepeti satın alma işl.
         header("Location: odeme.php");
         exit();
     }
@@ -85,5 +85,5 @@ $result = $stmt->get_result();
 $stmt->close();
 $conn->close();
 
-ob_end_flush(); // Çıktı tamponlamayı sonlandır
+ob_end_flush(); // Çıktı tamponlamayı sonlandırma işl.
 ?>

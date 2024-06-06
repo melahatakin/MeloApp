@@ -1,22 +1,16 @@
 <?php
-// Veritabanı bağlantısı
+
 $servername = "localhost";
 $username = "root";
-$password = ""; // Şifrenizi buraya girin
+$password = "";
 $dbname = "melo_store";
 
-// Bağlantıyı oluştur
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Bağlantıyı kontrol et
 if ($conn->connect_error) {
     die("Veritabanına bağlanılamadı: " . $conn->connect_error);
 }
-
-// SQL sorgusu
-$sql = "SELECT * FROM products WHERE category_id = 1"; // category_id'yi kendi veri tabanınıza göre güncelleyin
-
-// Sorguyu çalıştır ve sonuçları al
+$sql = "SELECT * FROM products WHERE category_id = 1";
 $result = $conn->query($sql);
 
 ?>
@@ -36,9 +30,7 @@ $result = $conn->query($sql);
         <h1>Kadın Üst Giyim</h1>
         <div class="products">
             <?php
-            // Sonuçları göster
             if ($result->num_rows > 0) {
-                // Veri varsa, her bir satırı işleyin
                 while ($row = $result->fetch_assoc()) {
             ?>
                     <div class="product">
@@ -60,6 +52,6 @@ $result = $conn->query($sql);
 </html>
 
 <?php
-// Bağlantıyı kapat
+
 $conn->close();
 ?>

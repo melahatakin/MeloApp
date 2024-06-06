@@ -37,7 +37,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-danger" href="indirimler.php">İndirimler</a>
+                    <a class="nav-link text-danger" href="#">İndirimler</a>
                 </li>
             </ul>
             <form class="d-flex mx-auto" action="index.php" method="GET" style="width: 50%;">
