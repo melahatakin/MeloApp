@@ -1,5 +1,6 @@
 <?php
 include 'libs/function.php';
+include 'includes/navbar.php';
 
 $user_id = 1; // Örnek kullanıcı ID'si, oturum açma sistemi kullanıyorsanız bunu dinamik yapmalısınız.
 
@@ -7,6 +8,16 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Bağlantı hatası: " . $conn->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['favorilerden_cikar'])) {
+        $urun_id = $_POST['urun_id'];
+        $kategori = $_POST['kategori'];
+        favorilerdenCikar($user_id, $urun_id, $kategori);
+        header("Location: favorites.php");
+        exit();
+    }
 }
 
 $sql = "SELECT * FROM favorites WHERE user_id = ?";
@@ -42,6 +53,11 @@ $result = $stmt->get_result();
                                 <h5 class="card-title"><?php echo $urun['name']; ?></h5>
                                 <p class="card-text"><?php echo $urun['description']; ?></p>
                                 <p><strong>Fiyat: <?php echo $urun['price']; ?> TL</strong></p>
+                                <form method="post">
+                                    <input type="hidden" name="urun_id" value="<?php echo $row['product_id']; ?>">
+                                    <input type="hidden" name="kategori" value="<?php echo $row['category']; ?>">
+                                    <button type="submit" name="favorilerden_cikar" class="btn btn-danger">Favorilerden Çıkar</button>
+                                </form>
                                 <a href="urun_detay.php?kategori=<?php echo $row['category']; ?>&urun_id=<?php echo $row['product_id']; ?>" class="btn btn-primary">Ürünü Gör</a>
                             </div>
                         </div>

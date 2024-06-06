@@ -12,10 +12,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="kadın.php" id="kadınDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Kadın</a>
                     <ul class="dropdown-menu" aria-labelledby="kadınDropdown">
-                        <li><a class="dropdown-item" href="kadın/yenigelen.php">Yeni Gelenler</a></li>
-                        <li><a class="dropdown-item" href="kadın/ustgiyim.php">Üst Giyim</a></li>
-                        <li><a class="dropdown-item" href="kadın/altgiyim.php">Alt Giyim</a></li>
-                        <li><a class="dropdown-item" href="kadın/aksesuar.php">Aksesuar</a></li>
+                        <li><a class="dropdown-item" href="kadın/kadınyenigelenler.php">Yeni Gelenler</a></li>
+                        <li><a class="dropdown-item" href="kadın/kadinustgiyim.php">Üst Giyim</a></li>
+                        <li><a class="dropdown-item" href="kadın/kadinaltgiyim.php">Alt Giyim</a></li>
+                        <li><a class="dropdown-item" href="kadın/kadinaksesuar.php">Aksesuar</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
